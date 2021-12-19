@@ -7,7 +7,10 @@ def main():
     for root,dirs,files in os.walk(dir):
         for file in files:
            if file.endswith(".csv"):
-               df=pd.read_csv(file)
+               try:
+                   df = pd.read_csv(file)
+               except:
+                   df = pd.read_csv(file, sep="|")
                name=file.split(".")
                filename=name[0]+"_utf_8.csv"
                df.to_csv(filename,encoding='utf-8-sig')
